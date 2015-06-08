@@ -5,7 +5,7 @@ import io.advantageous.qbit.service.ServiceQueue;
 
 import java.util.List;
 
-import static io.advantageous.boon.Lists.list;
+import static io.advantageous.boon.core.Lists.list;
 import static io.advantageous.qbit.service.ServiceBuilder.serviceBuilder;
 import static io.advantageous.qbit.service.ServiceProxyUtils.flushServiceProxy;
 
@@ -21,7 +21,7 @@ public class PrototypeMain {
         /* Create user data service and client proxy. */
         ServiceQueue userDataService = serviceBuilder()
                 .setServiceObject(new UserDataService())
-                .build().start();
+                .build().startServiceQueue();
         userDataService.startCallBackHandler();
         UserDataServiceClient userDataServiceClient = userDataService
                 .createProxy(UserDataServiceClient.class);
@@ -33,7 +33,7 @@ public class PrototypeMain {
                 new RecommendationService(userDataServiceClient);
         ServiceQueue recommendationServiceQueue = serviceBuilder()
                 .setServiceObject(recommendationServiceImpl)
-                .build().start().startCallBackHandler();
+                .build().startServiceQueue().startCallBackHandler();
 
         RecommendationServiceClient recommendationServiceClient =
                 recommendationServiceQueue.createProxy(RecommendationServiceClient.class);

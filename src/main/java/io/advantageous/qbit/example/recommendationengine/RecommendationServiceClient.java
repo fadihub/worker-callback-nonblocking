@@ -1,6 +1,6 @@
 package io.advantageous.qbit.example.recommendationengine;
 
-import io.advantageous.qbit.service.Callback;
+import io.advantageous.qbit.reactive.Callback;
 
 import java.util.List;
 

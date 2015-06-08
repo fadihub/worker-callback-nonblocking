@@ -1,11 +1,11 @@
 package io.advantageous.qbit.example.recommendationengine;
 
 
-import io.advantageous.boon.Lists;
-import io.advantageous.boon.cache.SimpleCache;
+import io.advantageous.boon.core.Lists;
+import io.advantageous.boon.primitive.SimpleLRUCache;
 import io.advantageous.qbit.annotation.QueueCallback;
 import io.advantageous.qbit.annotation.QueueCallbackType;
-import io.advantageous.qbit.service.Callback;
+import io.advantageous.qbit.reactive.Callback;
 
 import java.util.List;
 import java.util.concurrent.ArrayBlockingQueue;
@@ -16,8 +16,8 @@ import static io.advantageous.qbit.service.ServiceProxyUtils.flushServiceProxy;
 public class RecommendationService {
 
 
-    private final SimpleCache<String, User> users =
-            new SimpleCache<>(10_000);
+    private final SimpleLRUCache<String, User> users =
+            new SimpleLRUCache<>(10_000);
 
 
     private BlockingQueue<Runnable> callbacks = new ArrayBlockingQueue<Runnable>(10_000);
